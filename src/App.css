@@ -1,0 +1,36 @@
+/* styles/globals.css or any global stylesheet */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.gzvYBM {
+    display: grid;
+    align-content: end;
+    text-align: left;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-bottom: 8px;
+    height: calc(81px);
+    background: linear-gradient(rgba(27, 30, 36, 0) 0%, rgb(27, 30, 36) 84.21%);
+}
+
+.roundMenu {
+    width: 80px;
+    height: 80px;
+    background-color: rgb(18, 15, 15);
+    border-radius: 50%;
+    position: sticky;
+    bottom: 10px;
+    left: 100%;
+}
+
+.menuList {
+    color: white;
+}
