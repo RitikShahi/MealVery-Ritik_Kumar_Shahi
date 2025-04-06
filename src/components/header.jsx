@@ -26,7 +26,8 @@ function Header() {
   const [locationQuery, setLocationQuery] = useState('');
   const [locationData, setLocationData] = useState([]);
   const { setCoord } = useContext(Coordinates);
-  const [getCurrentLocation, setGetCurrentLocation] = useState({});
+  // Set default current location to Mumbai
+  const [getCurrentLocation, setGetCurrentLocation] = useState({ lat: 19.0760, lng: 72.8777 });
   const cart = useSelector((state) => state.cart);
 
   const navbarData = [
@@ -134,7 +135,7 @@ function Header() {
 
   function handleCancel() {
     setLocationQuery('');
-    locationData([]);
+    setLocationData([]);
   }
 
   const [signInModel, setSignInModel] = useState(false);
@@ -228,7 +229,7 @@ function Header() {
                   : null}
               </div>
 
-              {locationData.length < 0 || locationQuery === '' && (
+              {(locationData.length < 0 || locationQuery === '') && (
                 <div className="text-white group border mt-7 w-[90%] py-3 px-5 cursor-pointer">
                   <div className="flex gap-4 items-center mb-3">
                     <SlTarget color="black" size={20} />
