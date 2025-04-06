@@ -76,7 +76,7 @@ function OnlineFoodDelivery() {
     return (
         <>
             <div >
-                <h2 className='text-[1.6rem] font-bold capitalize'>Restaurants with online food delivery in {(data?.data?.cards[11]?.card?.card?.citySlug)}</h2>
+                <h2 className='text-[1.6rem] font-bold capitalize baap'>Restaurants with online food delivery in {(data?.data?.cards[11]?.card?.card?.citySlug)}</h2>
 
                 <FilterCompo filterData={filterData} handleFilteredOption={handleFilteredOption} filteredOption={filteredOption} />
 
