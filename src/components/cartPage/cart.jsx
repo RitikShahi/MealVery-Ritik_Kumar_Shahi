@@ -13,6 +13,13 @@ function Cart() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // Redirect to home if cart is empty or every item quantity is 0
+  useEffect(() => {
+    if (!cart || cart.length === 0 || cart.every(item => item.quantity === 0)) {
+      navigate('/');
+    }
+  }, [cart, navigate]);
+
   async function fetchDataById(res) {
     const response = await fetch(
       `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=${coord.lat}&lng=${coord.lng}&restaurantId=${res}&catalog_qa=undefined&submitAction=ENTER`
@@ -28,17 +35,7 @@ function Cart() {
     if (cart.resId) fetchDataById(cart.resId);
   }, [cart, coord]);
 
-  if (!cart || cart.length === 0 || cart.every(item => item.quantity === 0)) {
-    return (
-      <div className='flex justify-center items-center flex-col h-screen'>
-        <h3 className='text-xl mb-2 font-semibold text-zinc-600'>Your cart is empty</h3>
-        <p className='text-zinc-400'>You can go to home page to view more restaurants</p>
-        <Link to={'/'} className='uppercase mt-5 bg-[#ff5200] py-3 px-5 text-white font-semibold'>
-          SEE restaurants NEAR YOU
-        </Link>
-      </div>
-    );
-  }
+  // If there is no cart or every item quantity is 0, we now auto-redirect to home (see useEffect above)
 
   function handlePlaceOrder() {
     if (user?.userInfo) {
@@ -47,7 +44,6 @@ function Cart() {
     } else {
       // If not logged in, show login modal or redirect to login page.
       // Here we set a state to show the login prompt modal.
-      // (For demonstration, we simply show the login popup)
       setPopupForOrder('pleaseLogin');
     }
   }
@@ -59,7 +55,7 @@ function Cart() {
       <div className='w-[245%] mx-auto py-9 relative'>
         {showPopupForOrder === 'pleaseLogin' && (
           <ModelPortal>
-            <div className='bg-white w-[500px] h-[230px] absolute top-[50%] left-[50%] -translate-y-[50%]  -translate-x-[50%] p-4 px-6'>
+            <div className='bg-white w-[500px] h-[230px] absolute top-[50%] left-[50%] -translate-y-[50%] -translate-x-[50%] p-4 px-6'>
               <RxCross1
                 className='absolute right-4 cursor-pointer'
                 size={23}
@@ -77,7 +73,7 @@ function Cart() {
             </div>
           </ModelPortal>
         )}
-        <div className='bg-white  w-[40%]'>
+        <div className='bg-white w-[40%]'>
           <div className='flex gap-3 items-center shadow-lg px-6 py-3'>
             <div>
               <img
